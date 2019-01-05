@@ -123,8 +123,12 @@ def normalize_grayscale(image_data):
     :param image_data: The image data to be normalized
     :return: Normalized image data
     """
-    # TODO: Implement Min-Max scaling for grayscale image data
-
+    # Implement Min-Max scaling for grayscale image data
+    a = 0.1
+    b = 0.9
+    mi = image_data.min()
+    mx = image_data.max()
+    return (a + (image_data-mi)*(b-a)/(mx-mi))
 
 ### DON'T MODIFY ANYTHING BELOW ###
 # Test Cases
@@ -253,13 +257,13 @@ print('Data and modules loaded.')
 features_count = 784
 labels_count = 10
 
-# TODO: Set the features and labels tensors
-# features = 
-# labels = 
+# Set the features and labels tensors
+features = tf.placeholder(tf.float32, [None, features_count])
+labels = tf.placeholder(tf.float32, [None, labels_count])
 
-# TODO: Set the weights and biases tensors
-# weights = 
-# biases = 
+# Set the weights and biases tensors
+weights = tf.Variable(tf.random_normal([features_count, labels_count]))
+biases = tf.Variable(tf.zeros(labels_count))
 
 
 
@@ -369,10 +373,10 @@ print('Accuracy function created.')
 # *If you're having trouble solving problem 3, you can view the solution [here](https://github.com/udacity/CarND-TensorFlow-Lab/blob/master/solutions.ipynb).*
 
 #%%
-# TODO: Find the best parameters for each configuration
-# epochs = 
-# batch_size = 
-# learning_rate = 
+# Find the best parameters for each configuration
+epochs = 2
+batch_size = 100
+learning_rate = 0.15
 
 
 
@@ -450,10 +454,9 @@ print('Validation accuracy at {}'.format(validation_accuracy))
 
 #%%
 # TODO: Set the epochs, batch_size, and learning_rate with the best parameters from problem 3
-# epochs = 
-# batch_size = 
-# learning_rate = 
-
+epochs = 4
+batch_size = 100
+learning_rate = 0.2 
 
 
 ### DON'T MODIFY ANYTHING BELOW ###
